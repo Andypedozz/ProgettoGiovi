@@ -235,14 +235,6 @@ nav a:last-child::before {
     z-index: -1;
 }
 
-/* nav a:last-child:hover {
-    color: var(--bg-primary);
-}
-
-nav a:last-child:hover::before {
-    left: 0;
-} */
-
 /* Hero Section ultra avanzata - MODIFICATA */
 .hero {
     height: 100vh;
