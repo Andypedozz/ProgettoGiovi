@@ -1,43 +1,36 @@
-# Astro Starter Kit: Minimal
+# Progetto Sito Portfolio Fotografico
 
-```sh
-npm create astro@latest -- --template minimal
-```
+## Architettura
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Frontend:
 
-## 🚀 Project Structure
+Il framework scelto da utilizzare per questo progetto è Astro.js.
 
-Inside of your Astro project, you'll see the following folders and files:
+Motivazioni:
+* il framework è SEO friendly in quanto utilizza SSG o SSR per il rendering delle pagine a serve time o build time
+* Esso consentie eventualmente di integrare altri framework o librerie per la realizzazione delle UI
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Styling:
+* Visto che il progetto consiste in un portfolio fotografico, il sito risultante dovrà avere un look molto estetico e accattivante, con tanto di animazioni sullo scroll della pagina, sull'hover di componenti visivi (come card dei progetti o dei servizi offerti). Per tanto decidiamo di usare del puro CSS, in modo da avere massimo controllo sullo styling. E' ancora da studiare uno standard di strutturazione dello stile nelle varie parti di markup.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Per quanto riguarda la struttura del sito vero e proprio, decidiamo che sarò presente:
+* Una pagina principale alla root "/", che sarà uno scroll delle informazioni principali del portofolio, per tanto nessuna sezione separata in altre pagine. L'unica altra pagina che sarà raggiungibile nel frontend saraà una pagina dedicata all'espozione del singolo progetto, in quanto mostrare interi progetti con tutte le loro immagini nella pagina principale sarebbe troppo corposo; lì mostreremo solo un numero limitato di progetti, con solo la copertina, e al click sulle card di tali progetti, si verrà reindirizzati alle pagine dedicate.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Backend:
+Il backend non sarà un vero e proprio backend con un server all'interno del progetto, ma utilizzeremo gli Endpoint di Astro, ovvero file come projects.js, nella cartella "src/pages/api", che consentiranno di definire delle richieste HTTP di qualsiasi tipo, per operare azioni di lettura e scrittura nella cartella src/data
 
-Any static assets, like images, can be placed in the `public/` directory.
+Tutto ciò che concerne le operazioni di aggiunta, aggiornamento o eliminazione dei progetti e immagini del fotografo, dovranno essere facilmente operabili da una dashboard admin che implementeremo, e le operazioni di associazione delle immagini ai progetti dovranno essere totalmente automatizzate, tramite un drag and drop delle immagini e definizione da form dei progetti.
 
-## 🧞 Commands
+### Entità Backend:
+* Progetto
+    * id
+    * nome
+    * anno
+    * descrizione
+    * idCopertina
+* Media
+    * id
+    * tipo
+    * percorso
+    * idProgetto
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
