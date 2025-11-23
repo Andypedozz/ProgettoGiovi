@@ -1,0 +1,86 @@
+<div>
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="login-form-container">
+            <div class="brand">
+                <div class="logo">RECORD</div>
+                <div class="subtitle">ADMIN PORTAL</div>
+            </div>
+            
+            <h2>Admin Access</h2>
+            <p>Enter your credentials to access the dashboard</p>
+            
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" class="form-input" placeholder="Enter admin username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter admin password" required>
+                    <button type="button" class="password-toggle" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                
+                <button type="submit" class="login-button">
+                    <span>Sign In</span>
+                    <span>→</span>
+                </button>
+                
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script is:inline>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle icon
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+
+        // Form submission
+        document.querySelector('.login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your login logic here
+            console.log('Admin login form submitted');
+            
+            // Simulate login process
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // In a real scenario, you would send this to a server
+            if(username && password) {
+                // Show loading state
+                const button = document.querySelector('.login-button');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+                button.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Reset button
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    
+                    // In a real app, you would redirect to the dashboard
+                    alert('Login successful! Redirecting to dashboard...');
+                    // window.location.href = '/dashboard';
+                }, 1500);
+            }
+        });
+    </script>
+</div>
