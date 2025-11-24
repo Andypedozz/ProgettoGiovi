@@ -183,6 +183,7 @@ nav {
 
 nav a {
     color: var(--text-secondary);
+    text-wrap-mode: nowrap;
     text-decoration: none;
     font-size: 0.95rem;
     letter-spacing: 0.08em;
