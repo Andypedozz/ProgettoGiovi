@@ -1,0 +1,14 @@
+---
+const { project } = Astro.props;
+---
+
+<article class="work-item">
+    <img class="work-image" src={project.image} alt="">
+    <div class="work-info">
+        <h3>{project.title}</h3>
+        <a href="#" class="work-link">
+            <span>View Project</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</article>

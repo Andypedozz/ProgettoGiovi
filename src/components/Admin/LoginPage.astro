@@ -1,3 +1,7 @@
+---
+import "../../styles/login.css";
+---
+
 <div>
     <!-- Login Container -->
     <div class="login-container">
@@ -41,48 +45,4 @@
             </form>
         </div>
     </div>
-
-    <script is:inline>
-        // Toggle password visibility
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            
-            // Toggle icon
-            this.querySelector('i').classList.toggle('fa-eye');
-            this.querySelector('i').classList.toggle('fa-eye-slash');
-        });
-
-        // Form submission
-        document.querySelector('.login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add your login logic here
-            console.log('Admin login form submitted');
-            
-            // Simulate login process
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // In a real scenario, you would send this to a server
-            if(username && password) {
-                // Show loading state
-                const button = document.querySelector('.login-button');
-                const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
-                button.disabled = true;
-                
-                // Simulate API call
-                setTimeout(() => {
-                    // Reset button
-                    button.innerHTML = originalText;
-                    button.disabled = false;
-                    
-                    // In a real app, you would redirect to the dashboard
-                    alert('Login successful! Redirecting to dashboard...');
-                    // window.location.href = '/dashboard';
-                }, 1500);
-            }
-        });
-    </script>
 </div>

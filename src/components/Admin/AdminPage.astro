@@ -1,65 +1,90 @@
-<div>
-    <header>
-        <h1>Admin Dashboard</h1>
-    </header>
-    <div class="sidebar">
-        <nav>
-            <ul>
-                <button>Gestione Progetti</button>
-                <button>Gestione Foto</button>
-            </ul>
-        </nav>
+---
+import "../../styles/admin.css";
+import DataTable from "../DataTable.astro";
+
+const data = [
+    { id: 1, nome: "Roby's", descrizione: "ciao", anno: 2025 },
+    { id: 1, nome: "Roby's", descrizione: "ciao", anno: 2025 },
+    { id: 1, nome: "Roby's", descrizione: "ciao", anno: 2025 }
+];
+
+const columns = ["ID", "Nome", "Descrizione", "Anno"];
+
+function rowActions(row: any) {
+  return [
+    {
+      label: "Modifica",
+      onClick: `alert("Modifico ${row.nome}")`
+    },
+    {
+      label: "Elimina",
+      onClick: `alert("Elimino ${row.nome}")`
+    }
+  ];
+}
+---
+
+<div class="page-wrapper">
+  <header class="page-header">
+    <div>
+      <h1>Admin Dashboard</h1>
     </div>
-    <div class="pageContainer">
-        <div class="gestioneProgetti">
-            <div>
-                <h3>Aggiungi Progetto</h3>
-                <form action="">
-                    <label for="">ID</label>
-                    <input type="text" />
-                    <label for="">Nome</label>
-                    <input type="text" />
-                    <label for="">Anno</label>
-                    <input type="text" />
-                    <label for="">Descrizione</label>
-                    <input type="text" />
-                    <label for="">Copertina</label>
-                    <input type="text" />
-                </form>
-            </div>
-            <div>
-                <h3>Aggiorna Progetto</h3>
-                <form action="">
-                    <label for="">ID</label>
-                    <input type="text" />
-                    <label for="">Nome</label>
-                    <input type="text" />
-                    <label for="">Anno</label>
-                    <input type="text" />
-                    <label for="">Descrizione</label>
-                    <input type="text" />
-                    <label for="">Copertina</label>
-                    <input type="text" />
-                </form>
-            </div>
-            <div>
-                <h3>Elimina Progetto</h3>
-                <form action="">
-                    <label for="">ID</label>
-                    <select name="" id="">
-                        <optgroup>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                        </optgroup>
-                    </select>
-                    <input type="submit" value="Elimina" />
-                </form>
-            </div>
-        </div>
-        <div class="gestioneFoto"></div>
+    <div>
+      <a href="/">Home</a>
     </div>
+  </header>
+
+  <main class="page-content two-columns">
+    <!-- SINISTRA -->
+    <div class="left-panel">
+      <button id="newProjectBtn">Nuovo progetto</button>
+      <DataTable data={data} columns={columns} actions={rowActions} />
+    </div>
+
+    <!-- DESTRA (form nascosto di default) -->
+    <div class="right-panel">
+      <div id="projectForm" class="form-container hidden">
+        <h2>Nuovo Progetto</h2>
+        <form>
+          <label>
+            Nome:
+            <input type="text" name="nome" />
+          </label>
+
+          <label>
+            Descrizione:
+            <textarea name="descrizione" rows="10" ></textarea>
+          </label>
+
+          <label>
+            Anno:
+            <input type="text" name="nome" />
+          </label>
+
+          <!-- Drag & Drop fake -->
+          <label>Immagini:</label>
+          <div class="dropzone" id="dropzone">
+            Trascina qui le immagini
+          </div>
+
+          <label>
+            Immagine di copertina (nome):
+            <input type="text" name="cover" placeholder="es. cover.jpg" />
+          </label>
+
+          <button type="submit">Crea progetto</button>
+        </form>
+      </div>
+    </div>
+  </main>
 </div>
+
+<!-- Script per mostrare/nascondere il form -->
+<script>
+  const btn = document.getElementById("newProjectBtn");
+  const form = document.getElementById("projectForm");
+
+  btn?.addEventListener("click", () => {
+    form?.classList.remove("hidden");
+  });
+</script>

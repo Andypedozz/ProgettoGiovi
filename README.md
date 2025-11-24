@@ -34,3 +34,8 @@ Tutto ciò che concerne le operazioni di aggiunta, aggiornamento o eliminazione 
     * percorso
     * idProgetto
 
+Funzionamento Admin Dashboard:
+L'utente deve poter, in un unico form, inserire i dati di un nuovo progetto e caricare le immagini da un drag and drop e selezionarne una come copertina.
+
+Deve poi da un altro form poter modificare le informazioni di un progetto
+

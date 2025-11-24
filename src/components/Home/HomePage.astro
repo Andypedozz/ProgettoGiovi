@@ -1,13 +1,14 @@
 ---
 import "../../styles/home.css"
+import ProjectCard from "./ProjectCard.astro"
 
-const links = [
-	{ href: "#works", label: "Lavori"},
-	{ href: "#about", label: "About"},
-	{ href: "#services", label: "Servizi"},
-	{ href: "/admin", label: "Admin"},
-	{ href: "#cta", label: "Contattami"},
+const projects = [
+    { image: "images/opia.jpg", title: "OpiaSS25"},
+    { image: "images/robys.jpg", title: "Pizzeria Roby's"},
+    { image: "images/supermoto.jpg", title: "Supermoto"},
+    { image: "images/enoteca.jpg", title: "Enoteca Montevecchio"},
 ]
+
 ---
 
 <div>
@@ -31,7 +32,7 @@ const links = [
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-image"></div>
+                <img class="hero-image" src="images/hero.jpg" alt="">
                 <div class="hero-text">
                     <h1>Where Creativity meets Emotion</h1>
                     <p>
@@ -53,36 +54,7 @@ const links = [
         <div class="container">
             <h2>I nostri lavori</h2>
             <div class="works-grid">
-                <article class="work-item">
-                    <div class="work-image"></div>
-                    <div class="work-info">
-                        <h3>Pianca – Armonie</h3>
-                        <a href="#" class="work-link">
-                            <span>View Project</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-                <article class="work-item">
-                    <div class="work-image"></div>
-                    <div class="work-info">
-                        <h3>Minimal – Essence</h3>
-                        <a href="#" class="work-link">
-                            <span>View Project</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-                <article class="work-item">
-                    <div class="work-image"></div>
-                    <div class="work-info">
-                        <h3>Urban – Rhythm</h3>
-                        <a href="#" class="work-link">
-                            <span>View Project</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
+                 {projects.map(project => <ProjectCard project={project}/>)}
             </div>
         </div>
     </section>

@@ -1,0 +1,172 @@
+---
+// Props:
+// data: Array<Object>
+// columns?: Array<string>
+// actions?: (row) => Array<{ label: string, onClick: string }>
+
+const { data = [], columns = null, actions = null } = Astro.props;
+
+// Colonne header (solo per mostrare l’header)
+const headerColumns =
+  columns && columns.length > 0
+    ? columns
+    : data.length > 0
+      ? Object.keys(data[0])
+      : [];
+---
+
+<div class="table-wrapper">
+  <div class="table-scroll-container">
+    <table class="dark-table">
+      <thead>
+        <tr>
+          {headerColumns.map((col: any) => <th>{col}</th>)}
+          {actions && <th>Actions</th>}
+        </tr>
+      </thead>
+
+      <tbody>
+        {
+          data.map((row: any) => {
+            const rowKeys = Object.keys(row);
+            const rowActions = actions ? actions(row) : null;
+
+            return (
+              <tr>
+                {rowKeys.map((key) => (
+                  <td>{row[key]}</td>
+                ))}
+
+                {actions && (
+                  <td class="actions-cell">
+                    <details>
+                      <summary>⋮</summary>
+                      <ul class="actions-menu">
+                        {rowActions.map((action: any) => (
+                          <li>
+                            <button onclick={action.onClick}>
+                              {action.label}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </td>
+                )}
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  /* --- Dark Minimal Style --- */
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 1rem 0;
+  }
+
+  .dark-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1c1c1c;
+    color: #eaeaea;
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+  }
+
+  .dark-table th,
+  .dark-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #333;
+  }
+
+  .dark-table th {
+    background: #111;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #444;
+  }
+
+  .dark-table tr:hover {
+    background: #2a2a2a;
+  }
+
+  /* --- Actions Column --- */
+
+  .actions-cell {
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  .actions-cell summary {
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #333;
+    border: 1px solid #444;
+    user-select: none;
+  }
+
+  .actions-cell summary:hover {
+    background: #444;
+  }
+
+  .actions-menu {
+    margin: 0;
+    padding: 0.25rem 0;
+    list-style: none;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 4px;
+    position: absolute;
+    min-width: 120px;
+    z-index: 10;
+  }
+
+  .actions-menu li {
+    margin: 0;
+  }
+
+  .actions-menu button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: #eaeaea;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .actions-menu button:hover {
+    background: #444;
+  }
+
+  .table-scroll-container {
+    max-height: 400px; /* Puoi modificare questo valore */
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+  }
+
+  /* scrollbar dark minimal */
+  .table-scroll-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .table-scroll-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  .table-scroll-container::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+  }
+</style>
