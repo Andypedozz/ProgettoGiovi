@@ -82,6 +82,8 @@ import Layout from "../layouts/Layout.astro";
                         body: JSON.stringify(data),
                     });
 
+                    document.getElementById(resultId).textContent = (res.ok)? "Login avvenuto con successo" : "Credenziali non valide!";
+
                     if (res.ok) {
                         // ricarico la pagina protetta dopo login/registrazione
                         setTimeout(() => {

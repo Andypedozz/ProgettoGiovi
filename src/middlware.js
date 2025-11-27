@@ -40,3 +40,24 @@ export function adminOnly(handler) {
     return handler(context);
   };
 }
+
+export function onRequest({ request, redirect }) {
+  const url = new URL(request.url);
+
+  // Protegge /admin e tutte le sotto-route
+  if (url.pathname.startsWith('/admin')) {
+    const token = request.headers.get('cookie')
+      ?.split(';')
+      ?.find(c => c.trim().startsWith('token='))
+      ?.split('=')[1];
+
+    if (!token) {
+      return redirect('/login');
+    }
+
+    const user = verifyToken(token);
+    if (!user || user.role !== 'admin') {
+      return redirect('/login');
+    }
+  }
+}

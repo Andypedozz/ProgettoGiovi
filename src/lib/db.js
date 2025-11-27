@@ -2,7 +2,7 @@
 import Database from 'better-sqlite3';
 
 // Inizializza DB SQLite
-const db = new Database('database.sqlite');
+const db = new Database("src/data/database.sqlite");
 
 // Crea tabella utenti se non esiste
 db.exec(`

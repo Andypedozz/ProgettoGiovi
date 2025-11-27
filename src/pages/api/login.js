@@ -24,7 +24,11 @@ export async function POST({ request }) {
   const token = generateToken({ id: user.id, role: user.role });
 
   return new Response(JSON.stringify({ token }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' }
-  });
+  status: 200,
+  headers: {
+    "Content-Type": "application/json",
+    "Set-Cookie": `token=${token}; HttpOnly; Path=/; Max-Age=604800`
+  }
+});
+
 }
