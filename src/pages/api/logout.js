@@ -1,4 +1,4 @@
-export async function POST() {
+export async function GET() {
   return new Response(JSON.stringify({ message: "Logout eseguito" }), {
     status: 200,
     headers: {

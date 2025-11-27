@@ -1,5 +1,5 @@
 // src/pages/api/me.js
-import { authRequired } from "../../middlware.js";
+import { authRequired } from "../../middleware.js";
 
 export const GET = authRequired(async ({ user }) => {
   return new Response(JSON.stringify({ user }), {
